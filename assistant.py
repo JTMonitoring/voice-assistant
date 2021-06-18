@@ -4,10 +4,37 @@ from os import path
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 import keyboard
-from playsound import playsound
+from pydub import AudioSegment
+from pydub.playback import play
+
 from chores import *
 
 r = sr.Recognizer()
+
+
+
+class chore():
+    def executechore(transcript):
+        print("Executing .."+transcript)
+        if "open Firefox" in transcript:
+            print("opening firefox")
+            os.system("firefox")
+        return
+
+    def executesudochore(transcript):
+        print("Executing as sudo.."+transcript)
+        return
+
+def open(chore):
+    if str(chore) == "open Firefox":
+        print("opening firefox")
+        os.system("firefox")
+
+def insult(chore):
+    if "f****** b****" in chore:
+        voice = AudioSegment.from_mp3('src/library/fuckyou.mp3')
+        play(voice)
+        
 
 def recognize_audio():
     sound = AudioSegment.from_wav("src/tmp/tempreceive.wav")
@@ -48,46 +75,70 @@ while True:
     #     if uinput == "r":
     #         print("Shortcut Detected! Listening..")
     #         save_audio()
-    save_audio()
+ 
 
     
-    path = "src/tmp/tempreceive.wav"
-    isdir = os.path.isfile(path)
-    if isdir == True:
-        
-        transcript = recognize_audio()
+    # path = "src/tmp/tempreceive.wav"
+    # isdir = os.path.isfile(path)
+    # if isdir == True:
+    try:    
+        transcript = save_audio()
         print("[INPUT RECIEVED]:", transcript)
+        
+        trigger = "assistant"
+        sudo_trigger = "sudo penis"
+        chore = save_audio()
+        if trigger in chore:
+            voice = AudioSegment.from_mp3('src/library/greeting.mp3')
+            play(voice)
+            # chore.executechore(chore)
+            # insult(chore)
+            try:
+                transcript = save_audio()
+                if transcript == "you suck penis":
+                    voice = AudioSegment.from_mp3('src/library/fuckyou.mp3')
+                    play(voice)
+            except:
+                noaudio = True
+        # if len(chore) < 0 and :
+        #     chore.executechore(chore)
+        
+    except:
+        noaudio = True
+        
 
 
         #continuously listen for trigger to access sudo commands
-        trigger = "hey bitch"
-        sudo_trigger = "sudo bitch"
+    # print("transcript  "+transcript)
+    
 
-        if trigger in transcript:
-             #alternative to 'hey google' 
-            playsound('src/library/greeting.mp3')
-            try:
-                save_audio()
-            except:
-                replaysound("src/library/noinput.mp3")
+    # if trigger in transcript:
+    #     print("Keyword heard")
+    #      #alternative to 'hey google' 
+    #     voice = AudioSegment.from_mp3('src/library/greeting.mp3')
+    #     play(voice)
+    #     try:
+    #         save_audio()
+    #     except:
+    #         replaysound("src/library/noinput.mp3")
 
-            isdir = os.path.isfile(path)
-            if isdir == True:
-                transcript = recognize_audio()
-                chore.executechore(transcript)
-                
+    #         # isdir = os.path.isfile(path)
+    #         # if isdir == True:
+    #             # transcript = recognize_audio()
+    #     chore.executechore(transcript)
+               
 
-            #------------------------------------------------------------------      
+    #         #------------------------------------------------------------------      
 
-        elif sudo_trigger in transcript:
-            playsound('src/library/greeting.mp3')
-            try:
-                save_audio()
-            except:
-                replaysound("src/library/noinput.mp3")
-            
-            isdir = os.path.isfile(path)
-            if isdir == True:
-                transcript = recognize_audio()
-                executesudochore(transcript)
+    # elif sudo_trigger in transcript:
+    #     playsound('src/library/greeting.mp3')
+    #     try:
+    #         save_audio()
+    #     except:
+    #         replaysound("src/library/noinput.mp3")
+        
+    #     isdir = os.path.isfile(path)
+    #     if isdir == True:
+    #         transcript = recognize_audio()
+    #         executesudochore(transcript)
                 
