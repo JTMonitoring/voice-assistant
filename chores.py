@@ -1,12 +1,9 @@
 
-
-class chore():
-    def executechore(transcript):
-        print("Executing .."+transcript)
-        if "open Firefox" in transcript:
+def think(transcript):
+    print("thinking.. "+transcript)
+    words = transcript.split()
+    print(splits)
+    for word in words:
+        if word.lower() == "firefox":
             os.system("firefox")
-        return
-
-    def executesudochore(transcript):
-        print("Executing as sudo.."+transcript)
-        return
+    
