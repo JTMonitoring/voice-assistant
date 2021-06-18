@@ -43,10 +43,12 @@ def save_audio():
 
 while True:
     try:
-        if keyboard.is_pressed("shift") and keyboard.is_pressed("tab"):
+        if keyboard.is_pressed("shift+ tab"):
+            print("Shortcut Detected! Listening..")
             save_audio()
     except:
-        break
+        noinput = True
+
     
     path = "src/tmp/tempreceive.wav"
     isdir = os.path.isfile(path)
@@ -65,25 +67,25 @@ while True:
             playsound('src/library/greeting.mp3')
             try:
                 save_audio()
-            
-            if os.path.isfile("src/tmp/tempreceive.wav"):
+            except:
+                replaysound("src/library/noinput.mp3")
+
+            isdir = os.path.isfile(path)
+            if isdir == True:
                 transcript = recognize_audio()
                 executechore(transcript)
                 
-            except:
-                playsound("src/library/noinput.mp3")
-            
-            
+
+            #------------------------------------------------------------------      
 
         elif sudo_trigger in transcript:
-            #recognize commands as sudo chores
-            playsound("src/library/greeting.mp3")
+            playsound('src/library/greeting.mp3')
             try:
                 save_audio()
+            except:
+                replaysound("src/library/noinput.mp3")
             
-            if os.path.isfile("src/tmp/tempreceive.wav"):
+            isdir = os.path.isfile(path)
+            if isdir == True:
                 transcript = recognize_audio()
                 executesudochore(transcript)
-                
-            except:
-                playsound("src/library/noinput.mp3")
