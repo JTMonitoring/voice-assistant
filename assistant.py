@@ -34,20 +34,21 @@ def recognize_audio():
 
 def save_audio():
     with sr.Microphone() as source:
-        audio_data = r.record(source, duration=5)
+        audio_data = r.record(source, duration=6)
         print("listening...")
         text = r.recognize_google(audio_data)
-        temp_file = open("src/tmp/tempreceive.wav")
-        temp_file.write(text)
-        temp_file.close()
-
+        # temp_file = open("src/tmp/tempreceive.txt")
+        # temp_file.write(text)
+        # temp_file.close()
+    print(text)
+    return text
 while True:
-    try:
-        if keyboard.is_pressed("shift+ tab"):
-            print("Shortcut Detected! Listening..")
-            save_audio()
-    except:
-        noinput = True
+    # uinput = input("> ")
+    # try:
+    #     if uinput == "r":
+    #         print("Shortcut Detected! Listening..")
+    #         save_audio()
+    save_audio()
 
     
     path = "src/tmp/tempreceive.wav"
@@ -73,7 +74,7 @@ while True:
             isdir = os.path.isfile(path)
             if isdir == True:
                 transcript = recognize_audio()
-                executechore(transcript)
+                chore.executechore(transcript)
                 
 
             #------------------------------------------------------------------      
@@ -89,3 +90,4 @@ while True:
             if isdir == True:
                 transcript = recognize_audio()
                 executesudochore(transcript)
+                
