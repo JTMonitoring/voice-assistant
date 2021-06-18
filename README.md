@@ -6,7 +6,7 @@ Python3 voice assistant understands difference between sudo commands and regular
 Installation:
 ```
 git clone https://github.com/dankwaifu/voice-assisant
-sudo apt-get install python-pyaudio python3-pyaudio
+sudo apt-get install python-pyaudio python3-pyaudio ffmpeg
 python3 -m pip install -r requirements.txt
 
 #to run
