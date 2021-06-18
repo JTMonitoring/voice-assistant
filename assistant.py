@@ -7,7 +7,7 @@ import keyboard
 from pydub import AudioSegment
 from pydub.playback import play
 
-from chores import *
+from chores import think
 
 r = sr.Recognizer()
 
@@ -95,9 +95,10 @@ while True:
             # insult(chore)
             try:
                 transcript = save_audio()
-                if transcript == "you suck penis":
-                    voice = AudioSegment.from_mp3('src/library/fuckyou.mp3')
-                    play(voice)
+                think(transcript)
+                # if transcript == "you suck penis":
+                #     voice = AudioSegment.from_mp3('src/library/fuckyou.mp3')
+                #     play(voice)
             except:
                 noaudio = True
         # if len(chore) < 0 and :
